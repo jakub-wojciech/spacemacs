@@ -22,6 +22,7 @@
     tern
     js-doc
     web-beautify
+    jsx-mode
     ))
 
 (defun javascript/init-coffee-mode ()
@@ -52,6 +53,7 @@
     :init
     (progn
       (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+      (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
       ;; required to make `<SPC> s l' to work correctly
       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode))
     :config
@@ -181,6 +183,10 @@
       (evil-leader/set-key-for-mode 'web-mode  "m=" 'web-beautify-html)
       (evil-leader/set-key-for-mode 'css-mode  "m=" 'web-beautify-css))))
 
+(defun javascript/init-jsx-mode ()
+  (use-package jsx-mode
+    :defer t
+    :init))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
   (defun javascript/post-init-company ()
